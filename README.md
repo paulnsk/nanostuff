@@ -1,2 +1,5 @@
-[TextCleaner](./TextCleaner/readme.md)
-[Банкомат](./NanoAtm/readme.md)
+
+## [TextCleaner](./TextCleaner/)
+
+
+## [Банкомат](./NanoAtm/)

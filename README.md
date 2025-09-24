@@ -1,5 +1,5 @@
 
-## [TextCleaner](./TextCleaner/)
+## Задание 1 [Text Cleaner](./TextCleaner/)
 
 
-## [Банкомат](./NanoAtm/)
+## Задание 2 [Банкомат](./NanoAtm/)

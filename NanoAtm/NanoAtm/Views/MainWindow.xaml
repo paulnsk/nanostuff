@@ -1,0 +1,83 @@
+﻿<Window x:Class="NanoAtm.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NanoAtm.Views"
+        xmlns:vm="clr-namespace:NanoAtm.ViewModels"
+        xmlns:controls="clr-namespace:NanoAtm.Views.Controls"
+        mc:Ignorable="d"
+        Title="NANO ATM" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:WalletViewModel}">
+            <controls:WalletView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DispenseViewModel}">
+            <controls:DispenseView/>
+        </DataTemplate>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <local:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
+
+    </Window.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Source="/Assets/logo.png" Height="200" Margin="20"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+
+            <TextBlock Text="Снятие наличных" Foreground="White" FontSize="28" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding WithdrawAmountString, UpdateSourceTrigger=PropertyChanged}" FontSize="48" TextAlignment="Center" Width="300" Margin="10"/>
+
+            <WrapPanel HorizontalAlignment="Center" Width="300">
+                <WrapPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="90"/>
+                        <Setter Property="Height" Value="60"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="FontSize" Value="28"/>
+
+
+                    </Style>
+                </WrapPanel.Resources>
+                <Button Content="1" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="1"/>
+                <Button Content="2" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="2"/>
+                <Button Content="3" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="3"/>
+                <Button Content="4" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="4"/>
+                <Button Content="5" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="5"/>
+                <Button Content="6" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="6"/>
+                <Button Content="7" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="7"/>
+                <Button Content="8" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="8"/>
+                <Button Content="9" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="9"/>
+                <Button Content="00" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="00"/>
+                <Button Content="0" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="0"/>
+                <Button Content="←" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="BACK"/>
+            </WrapPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Focusable="False" Content="Крупными" Command="{Binding WithdrawCommand}" CommandParameter="True"/>
+                <Button Focusable="False" Content="С разменом" Command="{Binding WithdrawCommand}" CommandParameter="False"/>
+            </StackPanel>
+
+            <Separator Height="40" Background="Transparent"/>
+
+            <Button Content="Внести наличные" Command="{Binding ShowDepositDialogCommand}" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" Text="{Binding Message}" FontSize="22" Foreground="Yellow" Background="Black" Padding="10" TextAlignment="Center"/>
+
+        <Grid Grid.Row="0" Grid.RowSpan="3" Background="#AA000000"
+              Visibility="{Binding CurrentDialog, Converter={StaticResource ObjectToVisibilityConverter}}">
+            <ContentControl Content="{Binding CurrentDialog}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

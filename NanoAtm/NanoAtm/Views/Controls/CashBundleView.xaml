@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="NanoAtm.Views.Controls.CashBundleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NanoAtm.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border BorderBrush="Gray" BorderThickness="1" Padding="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="0" ItemsSource="{Binding Notes}" MaxHeight="200">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Номинал" DisplayMemberBinding="{Binding Denomination, StringFormat={}{0:d}}"/>
+                        <GridViewColumn Header="Кол-во" DisplayMemberBinding="{Binding Count}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock Grid.Row="1" Margin="0,5,0,0" FontWeight="Bold" FontSize="16">
+                <Run Text="Итого: "/>
+                <Run Text="{Binding TotalAmount, StringFormat={}{0:N0} руб.}"/>
+            </TextBlock>
+        </Grid>
+    </Border>
+</UserControl>

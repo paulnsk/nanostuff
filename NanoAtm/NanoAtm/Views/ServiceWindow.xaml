@@ -1,0 +1,48 @@
+﻿<Window x:Class="NanoAtm.Views.ServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NanoAtm.Views"
+        mc:Ignorable="d"
+        Title="Сервисное окно" Height="600" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock FontSize="16">
+                <Run Text="Общий баланс: "/>
+                <Run Text="{Binding TotalBalance, StringFormat={}{0:N0} руб.}"/>
+            </TextBlock>
+        </StackPanel>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Cassettes}" AlternationCount="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="#FFE8E8E8"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Номинал" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Denomination, StringFormat={}{0:d} руб.}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Емкость" DisplayMemberBinding="{Binding Capacity}" Width="120"/>
+                    <GridViewColumn Header="Количество" DisplayMemberBinding="{Binding Count}" Width="120"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

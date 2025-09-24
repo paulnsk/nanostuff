@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="NanoAtm.Views.Controls.WalletView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NanoAtm.Views.Controls"
+             xmlns:enums="clr-namespace:NanoAtm.Enums"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600">
+
+
+    <Border Background="White" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Padding="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Соберите пачку для внесения" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ItemsControl Grid.Column="0" ItemsSource="{Binding AvailableDenominations}" Margin="10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <Button Content="{Binding}" 
+                                    ContentStringFormat="{}{0:d} ₽"
+                                    Command="{Binding DataContext.AddNoteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}" Margin="3" MinWidth="70"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+                <local:CashBundleView Grid.Column="2" DataContext="{Binding Bundle}" Margin="10"/>
+
+            </Grid>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button Content="Внести" Command="{Binding DepositCommand}" IsDefault="True" Background="#FF72C472" />
+                <Button Content="Отмена" Command="{Binding CancelCommand}" IsCancel="True" Background="#FFE07575"/>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</UserControl>

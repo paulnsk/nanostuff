@@ -25,7 +25,7 @@ public class MainViewModelTests
         _mockLogRelay = new Mock<IUiLogRelayService>();
         _mockConfig = new Mock<IOptions<TextCleanerConfig>>();
         
-        _mockConfig.Setup(c => c.Value).Returns(new TextCleanerConfig { TargetDir = "C:\\Target", MinWordLength = "3" });
+        _mockConfig.Setup(c => c.Value).Returns(new TextCleanerConfig { TargetDir = "C:\\Target", MinWordLength = 3 });
 
         _viewModel = new MainViewModel(_mockFileService.Object, _mockLogRelay.Object, _mockConfig.Object);
     }

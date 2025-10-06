@@ -31,47 +31,47 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Source="/Assets/logo.png" Height="200" Margin="20"/>
+        <Image Grid.Row="0" Source="/Assets/logo.png" Height="200" Margin="0"/>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+        <Viewbox Grid.Row="1">
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
 
-            <TextBlock Text="Снятие наличных" Foreground="White" FontSize="28" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding WithdrawAmountString, UpdateSourceTrigger=PropertyChanged}" FontSize="48" TextAlignment="Center" Width="300" Margin="10"/>
+                <TextBlock Text="Снятие наличных" FontSize="28" HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding WithdrawAmountString, UpdateSourceTrigger=PropertyChanged}" FontSize="48" TextAlignment="Center" Width="300" Margin="10"/>
 
-            <WrapPanel HorizontalAlignment="Center" Width="300">
-                <WrapPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Width" Value="90"/>
-                        <Setter Property="Height" Value="60"/>
-                        <Setter Property="Margin" Value="5"/>
-                        <Setter Property="FontSize" Value="28"/>
+                <WrapPanel HorizontalAlignment="Center" Width="300">
+                    <WrapPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="90"/>
+                            <Setter Property="Height" Value="60"/>
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="FontSize" Value="28"/>
+                        </Style>
+                    </WrapPanel.Resources>
+                    <Button Content="1" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="1"/>
+                    <Button Content="2" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="2"/>
+                    <Button Content="3" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="3"/>
+                    <Button Content="4" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="4"/>
+                    <Button Content="5" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="5"/>
+                    <Button Content="6" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="6"/>
+                    <Button Content="7" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="7"/>
+                    <Button Content="8" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="8"/>
+                    <Button Content="9" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="9"/>
+                    <Button Content="00" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="00"/>
+                    <Button Content="0" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="0"/>
+                    <Button Content="←" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="BACK"/>
+                </WrapPanel>
 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Focusable="False" Content="Крупными" Command="{Binding WithdrawCommand}" CommandParameter="True"/>
+                    <Button Focusable="False" Content="С разменом" Command="{Binding WithdrawCommand}" CommandParameter="False"/>
+                </StackPanel>
 
-                    </Style>
-                </WrapPanel.Resources>
-                <Button Content="1" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="1"/>
-                <Button Content="2" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="2"/>
-                <Button Content="3" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="3"/>
-                <Button Content="4" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="4"/>
-                <Button Content="5" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="5"/>
-                <Button Content="6" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="6"/>
-                <Button Content="7" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="7"/>
-                <Button Content="8" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="8"/>
-                <Button Content="9" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="9"/>
-                <Button Content="00" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="00"/>
-                <Button Content="0" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="0"/>
-                <Button Content="←" Command="{Binding AppendToWithdrawAmountCommand}" CommandParameter="BACK"/>
-            </WrapPanel>
+                <Separator Height="40" Background="Transparent"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Focusable="False" Content="Крупными" Command="{Binding WithdrawCommand}" CommandParameter="True"/>
-                <Button Focusable="False" Content="С разменом" Command="{Binding WithdrawCommand}" CommandParameter="False"/>
+                <Button Content="Внести наличные" Command="{Binding ShowDepositDialogCommand}" HorizontalAlignment="Center"/>
             </StackPanel>
-
-            <Separator Height="40" Background="Transparent"/>
-
-            <Button Content="Внести наличные" Command="{Binding ShowDepositDialogCommand}" HorizontalAlignment="Center"/>
-        </StackPanel>
+        </Viewbox>
 
         <TextBlock Grid.Row="2" Text="{Binding Message}" FontSize="22" Foreground="Yellow" Background="Black" Padding="10" TextAlignment="Center"/>
 
